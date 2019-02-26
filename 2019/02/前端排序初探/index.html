@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Array-Sort</title>
+</head>
+<body>
+  <div>
+    <img src="https://user-gold-cdn.xitu.io/2017/5/24/8d57a56a954b5f40db3966d19aa7c0d3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="">
+  </div>
+  <script>
+    /**
+     * 冒泡排序
+     * @description 相邻比较，后一个比前一个大则交换，从头到尾一次，则将最大的放到了末尾。重复执行。
+     **/
+    
+    function bubbleSort(arr) {
+      var l = arr.length;
+      for(var i = 0; i < l - 1; i++) {
+        for(var j = 0; j < l - 1 - i; j++) {
+          if(arr[j] > arr[j + 1]) {
+            var temp = arr[j + 1];
+            arr[j + 1] = arr[j];
+            arr[j] = temp;
+          }
+        }
+      }
+      return arr;
+    }
+    /**
+     * 选择排序
+     * @description 选择最大（小）元素，放到起始位置。然后继续从剩余中寻找最大（小）元素，直至所有元素均排序。
+     **/
+    
+    function selectionSort(arr) {
+      var l = arr.length;
+      var minIndex, temp;
+      for(var i = 0; i < l - 1; i++) {
+        minIndex = i;
+        for(var j = i + 1; j < l; j++) {
+          if(arr[minIndex] > arr[j]) {
+            minIndex = j;
+          }
+        }
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+      }
+      return arr;
+    }
+    /**
+     * 插入排序
+     * @description 将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。
+                    从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）
+     **/
+    
+    function insertSort(arr) {
+      var l = arr.length;
+      var current, preIndex;
+      for(var i = 1; i < l; i++) {
+        current = arr[i];
+        preIndex = i - 1;
+        while(preIndex >= 0 && arr[preIndex] > current) {
+          arr[preIndex + 1] = arr[preIndex];
+          preIndex--;
+        }
+        arr[preIndex + 1] = current;
+      }
+      return arr;
+    }
+    /**
+     * 归并排序
+     **/
+    
+    function mergeSort(arr) {
+      var l  = arr.length;
+      if(l < 2) {
+        return arr;
+      }
+      var middle = Math.floor(l / 2);
+      var left = arr.slice(0, middle);
+      var right = arr.slice(middle);
+      return merge(mergeSort(left), mergeSort(right));
+    }
+    function merge(left, right) {
+      var result = [];
+      while(left.length && right.length) {
+        if(left[0] < right[0]) {
+          result.push(left.shift());
+        }else {
+          result.push(right.shift());
+        }
+      }
+      while(left.length) {
+        result.push(left.shift());
+      }
+      while(right.length) {
+        result.push(right.shift());
+      }
+      return result;
+    }
+    /**
+     * test
+     **/
+    
+    function getTime(func, name) {
+      return function(arr) {
+        if(func && typeof func === 'function') {
+          let start = Date.now();
+          func(arr);
+          let end = Date.now();
+          console.log(`${name}: ${end - start} ms`);
+        }
+      };
+    }
+    var arr = [1, 5, 3, 2, 8, 6, 9, 4, 11, 13, 15, 18, 21, 28, 26, 35, 66, 20, 44];
+    var res = [];
+    res.push(getTime(bubbleSort, '冒泡排序'));
+    res.push(getTime(selectionSort, '选择排序'));
+    res.push(getTime(insertSort, '插入排序'));
+    res.push(getTime(mergeSort, '归并冒泡'));
+    res.forEach(sortFunc => {
+      sortFunc(arr);
+    }); 
+  </script>
+</body>
+</html>
