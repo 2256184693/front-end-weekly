@@ -1,0 +1,23 @@
+{
+  "name": "front-end-weekly",
+  "version": "0.0.1",
+  "description": "Something To Know About Front-End",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2256184693/front-end-weekly.git"
+  },
+  "keywords": [
+    "front-end",
+    "weekly"
+  ],
+  "author": "SH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2256184693/front-end-weekly/issues"
+  },
+  "homepage": "https://github.com/2256184693/front-end-weekly#readme"
+}
